@@ -1,5 +1,7 @@
 import pandas
 import config
+
+
 dfs = pandas.read_html('https://rate.bot.com.tw/xrt/all/day')
 # print(type(dfs))
 # print(len(dfs))
