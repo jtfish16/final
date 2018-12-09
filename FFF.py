@@ -25,35 +25,35 @@ currency['Date'] = pandas.to_datetime(currency['Date'])
 # print(currency.info())
 print(currency)
 
-# import sqlite3
-#
-# with sqlite3.connect('\\Macintosh HD\\Users\\janetlin\\Desktop\\123\\currency.sqlite') as db:
-#     currency.to_sql('currency', con=db, if_exists='append')
-#
-# with sqlite3.connect('currency.sqlite') as db:
-#     df = pandas.read_sql_query('select* from currency', con=db)
-# print(df)
+import sqlite3
 
-# import smtplib
-# from email.mime.multipart import MIMEMultipart
-# from email.mime.text import MIMEText
+with sqlite3.connect('\\Macintosh HD\\Users\\janetlin\\Desktop\\123\\currency.sqlite') as db:
+    currency.to_sql('currency', con=db, if_exists='append')
 
-# fromaddar = config.fromemail
-# toaddr = config.toemail
-# passwd = config.passwd
-# msg = MIMEMultipart()
-# msg['From'] = fromaddar
-# msg['To'] = toaddr
-# msg['Subject'] = '[Notification]'
-#
-# body = 'hello world'
-# msg.attach(MIMEText(body, 'plain'))
-#
-#
-# server = smtplib.SMTP('smtp.gmail.com', 587)
-# server.starttls()
-# server.login(fromaddar, passwd)
-# text = msg.as_string()
-# server.sendmail(fromaddar, toaddr, text)
-# server.quit()
+with sqlite3.connect('currency.sqlite') as db:
+    df = pandas.read_sql_query('select* from currency', con=db)
+print(df)
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+fromaddar = config.fromemail
+toaddr = config.toemail
+passwd = config.passwd
+msg = MIMEMultipart()
+msg['From'] = fromaddar
+msg['To'] = toaddr
+msg['Subject'] = '[Notification]'
+
+body = 'hello world'
+msg.attach(MIMEText(body, 'plain'))
+
+
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
+server.login(fromaddar, passwd)
+text = msg.as_string()
+server.sendmail(fromaddar, toaddr, text)
+server.quit()
 
