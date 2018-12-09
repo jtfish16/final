@@ -8,9 +8,9 @@ dfs = pandas.read_html('https://rate.bot.com.tw/xrt/all/day')
 currency = dfs[0]
 # print(type(currency))
 currency = currency.iloc[:,0:5]
-# currency = currency.iloc[7:8,:]
+currency = currency.iloc[7:8,:]
 
-# df.plot(kind = 'line', [y = 'currency2', 'cash'])
+df.plot(kind = 'line', [y = 'currency2', 'cash'])
 
 currency.columns = [u'Type', u'Cash_buyin', u'Cash_sellout', u'Period_buyin', u'Period_sellout']
 currency[u'Type'] = currency[u'Type'].str.extract('\((\w+)\)')
