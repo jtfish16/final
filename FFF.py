@@ -8,9 +8,10 @@ dfs = pandas.read_html('https://rate.bot.com.tw/xrt/all/day')
 currency = dfs[0]
 # print(type(currency))
 currency = currency.iloc[:,0:5]
+# print(currency)
 currency = currency.iloc[7:8,:]
 
-df.plot(kind = 'line', [y = 'currency2', 'cash'])
+# df.plot(kind = 'line', [y = 'currency2', 'cash'])
 
 currency.columns = [u'Type', u'Cash_buyin', u'Cash_sellout', u'Period_buyin', u'Period_sellout']
 currency[u'Type'] = currency[u'Type'].str.extract('\((\w+)\)')
@@ -25,14 +26,14 @@ currency['Date'] = pandas.to_datetime(currency['Date'])
 # print(currency.info())
 print(currency)
 
-import sqlite3
+# import sqlite3
 
-with sqlite3.connect('\\Macintosh HD\\Users\\janetlin\\Desktop\\123\\currency.sqlite') as db:
-    currency.to_sql('currency', con=db, if_exists='append')
+# with sqlite3.connect('\\Macintosh HD\\Users\\janetlin\\Desktop\\123\\currency.sqlite') as db:
+#     currency.to_sql('currency', con=db, if_exists='append')
 
-with sqlite3.connect('currency.sqlite') as db:
-    df = pandas.read_sql_query('select* from currency', con=db)
-print(df)
+# with sqlite3.connect('currency.sqlite') as db:
+#     df = pandas.read_sql_query('select* from currency', con=db)
+# print(df)
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
