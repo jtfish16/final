@@ -28,7 +28,7 @@ print(currency)
 
 # import sqlite3
 
-# with sqlite3.connect('\\Macintosh HD\\Users\\janetlin\\Desktop\\123\\currency.sqlite') as db:
+# with sqlite3.connect('\\') as db:
 #     currency.to_sql('currency', con=db, if_exists='append')
 
 # with sqlite3.connect('currency.sqlite') as db:
