@@ -8,7 +8,6 @@ dfs = pandas.read_html('https://rate.bot.com.tw/xrt/all/day')
 currency = dfs[0]
 # print(type(currency))
 currency = currency.iloc[:,0:5]
-# print(currency)
 currency = currency.iloc[7:8,:]
 
 # df.plot(kind = 'line', [y = 'currency2', 'cash'])
@@ -26,35 +25,35 @@ currency['Date'] = pandas.to_datetime(currency['Date'])
 # print(currency.info())
 print(currency)
 
-# import sqlite3
+temp = float(currency[u'Cash_sellout'])
+print(temp)
 
-# with sqlite3.connect('\\') as db:
-#     currency.to_sql('currency', con=db, if_exists='append')
+if(temp < 0.28):
+    # print('Buy It Now')
 
-# with sqlite3.connect('currency.sqlite') as db:
-#     df = pandas.read_sql_query('select* from currency', con=db)
-# print(df)
+    api_key = ''
 
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
 
-fromaddar = config.fromemail
-toaddr = config.toemail
-passwd = config.passwd
-msg = MIMEMultipart()
-msg['From'] = fromaddar
-msg['To'] = toaddr
-msg['Subject'] = '[Notification]'
+    fromaddar = config.fromemail
+    toaddr = config.toemail
+    passwd = config.passwd
+    msg = MIMEMultipart()
+    msg['From'] = fromaddar
+    msg['To'] = toaddr
+    msg['Subject'] = '[Notification] JPY Sweet point'
 
-body = 'hello world'
-msg.attach(MIMEText(body, 'plain'))
+    body = 'Buy It Now , '+ str(temp)
+    print(body)
+    msg.attach(MIMEText(body, 'plain'))
 
 
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.starttls()
-server.login(fromaddar, passwd)
-text = msg.as_string()
-server.sendmail(fromaddar, toaddr, text)
-server.quit()
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddar, passwd)
+    text = msg.as_string()
+    server.sendmail(fromaddar, toaddr, text)
+    server.quit()
 
